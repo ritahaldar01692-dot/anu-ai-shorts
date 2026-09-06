@@ -986,6 +986,32 @@
   renderShorts();
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const SUPABASE_URL = "https://kjuejpzpigkbhjxkksml.supabase.co";
+const SUPABASE_KEY = "sb_publishable_QUcBfXi4cAkkXNf08g_nyQ_FA6sgtvh";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+async function loadVideosFromSupabase() {
+  const { data, error } = await supabaseClient
+    .from("Videos")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Supabase error:", error);
+    return;
+  }
+
+  console.log("Supabase Videos:", data);
+}
+
+loadVideosFromSupabase();
+</script>
 </body>
 </html>
