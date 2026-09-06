@@ -1,1017 +1,593 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#111111" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anu AI Shorts</title>
 
-  <title>Anu AI Shorts — Watch Amazing AI Shorts</title>
-  <meta
-    name="description"
-    content="Anu AI Shorts — discover amazing AI stories, funny videos, love stories, animals, horror, motivation and more."
-  />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+body{
+  font-family:Arial,sans-serif;
+  background:#0b0b12;
+  color:#fff;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+header{
+  padding:18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#151522;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #080808;
-      color: #fff;
-      overflow-x: hidden;
-    }
+.logo{
+  font-size:22px;
+  font-weight:bold;
+}
 
-    button,
-    input {
-      font: inherit;
-    }
+.logo span{color:#ff3b81}
 
-    button {
-      cursor: pointer;
-    }
+.search{
+  width:100%;
+  max-width:500px;
+  margin:20px auto;
+  padding:0 15px;
+}
 
-    /* HEADER */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(8, 8, 8, 0.94);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid #222;
-    }
+.search input{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:25px;
+  background:#1d1d2a;
+  color:white;
+  outline:none;
+}
 
-    .header-inner {
-      max-width: 1100px;
-      margin: auto;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+.hero{
+  margin:15px;
+  padding:28px 20px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#7b2cff,#ff277f);
+}
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 20px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
+.hero h1{font-size:28px;margin-bottom:8px}
+.hero p{opacity:.9}
 
-    .logo-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 11px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, #ff2d55, #8b5cf6);
-      box-shadow: 0 5px 25px rgba(255, 45, 85, 0.25);
-    }
+.categories{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:10px 15px 20px;
+}
 
-    .logo span {
-      background: linear-gradient(90deg, #ff4d6d, #a78bfa);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
+.categories button{
+  border:none;
+  padding:10px 16px;
+  border-radius:20px;
+  background:#1d1d2a;
+  color:white;
+  white-space:nowrap;
+}
 
-    .search-box {
-      flex: 1;
-      position: relative;
-    }
+.categories button.active{
+  background:#ff3b81;
+}
 
-    .search-box input {
-      width: 100%;
-      background: #171717;
-      border: 1px solid #292929;
-      color: #fff;
-      border-radius: 25px;
-      padding: 11px 42px 11px 17px;
-      outline: none;
-    }
+.title{
+  padding:0 15px 15px;
+  font-size:21px;
+}
 
-    .search-box input:focus {
-      border-color: #8b5cf6;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+  padding:0 15px 30px;
+}
 
-    .search-icon {
-      position: absolute;
-      right: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.7;
-    }
+.card{
+  background:#171722;
+  border-radius:15px;
+  overflow:hidden;
+}
 
-    .profile-btn {
-      width: 38px;
-      height: 38px;
-      border: 0;
-      border-radius: 50%;
-      background: #202020;
-      color: #fff;
-      font-size: 18px;
-    }
+.card video{
+  width:100%;
+  aspect-ratio:9/16;
+  object-fit:cover;
+  background:#050509;
+}
 
-    /* HERO */
-    .hero {
-      max-width: 1100px;
-      margin: auto;
-      padding: 30px 16px 18px;
-    }
+.info{
+  padding:12px;
+}
 
-    .hero-card {
-      min-height: 190px;
-      border-radius: 25px;
-      padding: 28px;
-      background:
-        radial-gradient(circle at 80% 20%, rgba(139,92,246,.4), transparent 35%),
-        radial-gradient(circle at 15% 80%, rgba(255,45,85,.3), transparent 35%),
-        linear-gradient(135deg, #181818, #101010);
-      border: 1px solid #292929;
-      overflow: hidden;
-      position: relative;
-    }
+.info h3{
+  font-size:15px;
+  margin-bottom:6px;
+}
 
-    .hero-card h1 {
-      font-size: clamp(30px, 7vw, 54px);
-      line-height: 1;
-      margin-bottom: 13px;
-    }
+.info p{
+  color:#aaa;
+  font-size:12px;
+  margin-bottom:10px;
+}
 
-    .hero-card p {
-      color: #c8c8c8;
-      max-width: 620px;
-      line-height: 1.6;
-    }
+.actions{
+  display:flex;
+  gap:6px;
+}
 
-    .hero-btn {
-      margin-top: 20px;
-      border: 0;
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 25px;
-      background: linear-gradient(90deg, #ff2d55, #8b5cf6);
-      font-weight: 700;
-    }
+.actions button{
+  flex:1;
+  padding:8px 4px;
+  border:none;
+  border-radius:8px;
+  background:#262636;
+  color:white;
+}
 
-    /* CATEGORIES */
-    .section {
-      max-width: 1100px;
-      margin: auto;
-      padding: 8px 16px 22px;
-    }
+.empty{
+  text-align:center;
+  padding:40px 20px;
+  color:#aaa;
+  grid-column:1/-1;
+}
 
-    .section-title {
-      font-size: 21px;
-      margin-bottom: 13px;
-      font-weight: 800;
-    }
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  z-index:100;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
 
-    .categories {
-      display: flex;
-      gap: 9px;
-      overflow-x: auto;
-      scrollbar-width: none;
-      padding-bottom: 5px;
-    }
+.modal.show{display:flex}
 
-    .categories::-webkit-scrollbar {
-      display: none;
-    }
+.modal-box{
+  width:100%;
+  max-width:430px;
+  position:relative;
+}
 
-    .category {
-      flex: 0 0 auto;
-      border: 1px solid #2c2c2c;
-      background: #151515;
-      color: #ddd;
-      border-radius: 22px;
-      padding: 9px 14px;
-      white-space: nowrap;
-    }
+.modal video{
+  width:100%;
+  max-height:80vh;
+  border-radius:15px;
+  background:black;
+}
 
-    .category.active,
-    .category:hover {
-      background: #fff;
-      color: #000;
-    }
+.close{
+  position:absolute;
+  right:5px;
+  top:-45px;
+  border:none;
+  background:#ff3b81;
+  color:white;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  font-size:20px;
+}
 
-    /* SHORTS */
-    .shorts-feed {
-      max-width: 1100px;
-      margin: auto;
-      padding: 0 16px 80px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
+.modal-info{
+  padding-top:12px;
+}
 
-    .short-card {
-      position: relative;
-      aspect-ratio: 9 / 16;
-      overflow: hidden;
-      border-radius: 20px;
-      background: #151515;
-      border: 1px solid #292929;
-      cursor: pointer;
-    }
+@media(max-width:600px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
 
-    .short-card video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      background: #181818;
-    }
-
-    .video-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,.15),
-        transparent 40%,
-        rgba(0,0,0,.85)
-      );
-      pointer-events: none;
-    }
-
-    .short-info {
-      position: absolute;
-      left: 13px;
-      right: 13px;
-      bottom: 13px;
-      z-index: 2;
-    }
-
-    .short-category {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 12px;
-      background: rgba(0,0,0,.55);
-      font-size: 11px;
-      margin-bottom: 8px;
-    }
-
-    .short-title {
-      font-size: 15px;
-      font-weight: 700;
-      line-height: 1.35;
-      margin-bottom: 8px;
-    }
-
-    .short-stats {
-      display: flex;
-      gap: 12px;
-      color: #ddd;
-      font-size: 12px;
-    }
-
-    .play-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(0,0,0,.6);
-      display: grid;
-      place-items: center;
-      z-index: 2;
-    }
-
-    /* EMPTY / SEARCH */
-    .empty {
-      max-width: 1100px;
-      margin: 20px auto 100px;
-      padding: 40px 20px;
-      text-align: center;
-      color: #999;
-      display: none;
-    }
-
-    /* MODAL SHORT PLAYER */
-    .player-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.96);
-      z-index: 500;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 15px;
-    }
-
-    .player-modal.active {
-      display: flex;
-    }
-
-    .player {
-      height: min(88vh, 760px);
-      aspect-ratio: 9 / 16;
-      max-width: 95vw;
-      background: #111;
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      border: 1px solid #333;
-    }
-
-    .player video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .close-player {
-      position: fixed;
-      top: 18px;
-      right: 18px;
-      width: 42px;
-      height: 42px;
-      border: 0;
-      border-radius: 50%;
-      background: #222;
-      color: #fff;
-      font-size: 22px;
-      z-index: 600;
-    }
-
-    .player-info {
-      position: absolute;
-      left: 15px;
-      right: 15px;
-      bottom: 18px;
-      z-index: 3;
-      text-shadow: 0 2px 10px #000;
-    }
-
-    .player-info h2 {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-
-    .player-actions {
-      display: flex;
-      gap: 9px;
-      margin-top: 13px;
-    }
-
-    .action-btn {
-      border: 0;
-      background: rgba(0,0,0,.65);
-      color: #fff;
-      border-radius: 20px;
-      padding: 8px 13px;
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid #222;
-      padding: 30px 16px;
-      text-align: center;
-      color: #888;
-      line-height: 1.8;
-    }
-
-    footer strong {
-      color: #fff;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .footer-links a {
-      color: #aaa;
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      color: #fff;
-    }
-
-    /* MOBILE */
-    @media (max-width: 750px) {
-      .header-inner {
-        flex-wrap: wrap;
-      }
-
-      .logo {
-        order: 1;
-      }
-
-      .profile-btn {
-        order: 2;
-        margin-left: auto;
-      }
-
-      .search-box {
-        order: 3;
-        flex-basis: 100%;
-      }
-
-      .hero {
-        padding-top: 18px;
-      }
-
-      .hero-card {
-        min-height: 210px;
-        padding: 23px;
-      }
-
-      .shorts-feed {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-      }
-
-      .short-card {
-        border-radius: 16px;
-      }
-
-      .short-title {
-        font-size: 13px;
-      }
-    }
-
-    @media (max-width: 430px) {
-      .shorts-feed {
-        grid-template-columns: 1fr;
-        max-width: 430px;
-      }
-
-      .short-card {
-        aspect-ratio: 9 / 15;
-      }
-
-      .hero-card h1 {
-        font-size: 34px;
-      }
-    }
-  </style>
+@media(min-width:800px){
+  .grid{grid-template-columns:repeat(4,1fr)}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="header-inner">
-
-    <div class="logo">
-      <div class="logo-icon">▶</div>
-      <div>Anu <span>AI Shorts</span></div>
-    </div>
-
-    <div class="search-box">
-      <input
-        id="searchInput"
-        type="search"
-        placeholder="Search shorts..."
-        autocomplete="off"
-      />
-      <div class="search-icon">🔍</div>
-    </div>
-
-    <button class="profile-btn" title="Profile">👤</button>
-
-  </div>
+  <div class="logo">✨ Anu <span>AI Shorts</span></div>
 </header>
 
-<main>
+<div class="search">
+  <input id="searchInput" type="text" placeholder="Search videos...">
+</div>
 
-  <section class="hero">
-    <div class="hero-card">
-      <h1>Watch. Feel. Share. ❤️</h1>
-      <p>
-        Discover amazing AI Shorts every day — love, funny, sad,
-        horror, animals, village stories, city life and much more.
-      </p>
-      <button class="hero-btn" onclick="scrollToShorts()">
-        ▶ Watch Shorts
-      </button>
+<section class="hero">
+  <h1>Watch. Feel. Share. ❤️</h1>
+  <p>Discover amazing AI Shorts videos.</p>
+</section>
+
+<div class="categories" id="categories">
+  <button class="active" data-category="All">All</button>
+  <button data-category="Love">❤️ Love</button>
+  <button data-category="Sad">😢 Sad</button>
+  <button data-category="Funny">😂 Funny</button>
+  <button data-category="Attitude">😎 Attitude</button>
+  <button data-category="Horror">👻 Horror</button>
+  <button data-category="Animals">🐶 Animals</button>
+  <button data-category="Birds">🐦 Birds</button>
+  <button data-category="Wildlife">🦁 Wildlife</button>
+  <button data-category="City">🏙️ City</button>
+  <button data-category="Village">🌾 Village</button>
+  <button data-category="Fantasy">🧚 Fantasy</button>
+  <button data-category="Motivation">🔥 Motivation</button>
+</div>
+
+<h2 class="title">Latest Shorts</h2>
+
+<div class="grid" id="shortsGrid"></div>
+
+<div class="modal" id="videoModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal()">×</button>
+    <video id="modalVideo" controls autoplay></video>
+    <div class="modal-info">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDescription"></p>
     </div>
-  </section>
-
-  <section class="section">
-    <div class="section-title">🔥 Categories</div>
-
-    <div class="categories" id="categories">
-
-      <button class="category active" data-category="All">✨ All</button>
-      <button class="category" data-category="Love">❤️ Love</button>
-      <button class="category" data-category="Sad">😢 Sad</button>
-      <button class="category" data-category="Funny">😂 Funny</button>
-      <button class="category" data-category="Attitude">🔥 Attitude</button>
-      <button class="category" data-category="Horror">👻 Horror</button>
-      <button class="category" data-category="Animals">🐶 Animals</button>
-      <button class="category" data-category="Birds">🐦 Birds</button>
-      <button class="category" data-category="Wildlife">🦁 Wildlife</button>
-      <button class="category" data-category="City">🌆 City</button>
-      <button class="category" data-category="Village">🏡 Village</button>
-      <button class="category" data-category="Fantasy">👑 Fantasy</button>
-      <button class="category" data-category="Motivation">💪 Motivation</button>
-
-    </div>
-  </section>
-
-  <section class="section" id="shortsSection">
-    <div class="section-title" id="feedTitle">🆕 Latest Shorts</div>
-  </section>
-
-  <div class="shorts-feed" id="shortsFeed"></div>
-
-  <div class="empty" id="emptyState">
-    <div style="font-size:40px;">🔍</div>
-    <h2 style="margin:10px 0;">No Shorts Found</h2>
-    <p>Try another search or category.</p>
-  </div>
-
-</main>
-
-<footer>
-  <strong>✨ Anu AI Shorts</strong>
-  <br />
-  Original & licensed short-form entertainment.
-  <div class="footer-links">
-    <a href="#">About</a>
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms</a>
-    <a href="#">Contact</a>
-  </div>
-  <br />
-  © 2026 Anu AI Shorts
-</footer>
-
-<!-- PLAYER MODAL -->
-
-<div class="player-modal" id="playerModal">
-
-  <button class="close-player" onclick="closePlayer()">✕</button>
-
-  <div class="player">
-
-    <video
-      id="mainPlayer"
-      controls
-      playsinline
-      loop
-    ></video>
-
-    <div class="player-info">
-
-      <h2 id="playerTitle"></h2>
-
-      <div id="playerCategory"></div>
-
-      <div class="player-actions">
-        <button class="action-btn" id="likeBtn">❤️ Like</button>
-        <button class="action-btn" id="saveBtn">🔖 Save</button>
-        <button class="action-btn" id="shareBtn">↗ Share</button>
-      </div>
-
-    </div>
-
   </div>
 </div>
 
-<script>
-  /*
-    ANU AI SHORTS
-    -----------------------------
-    Temporary demo data.
-
-    Later this exact structure can be
-    connected to Supabase/database + API.
-  */
-
-  const shorts = [
-    {
-      id: 1,
-      title: "A Little Dog With a Big Heart 🐶❤️",
-      category: "Animals",
-      views: "12K",
-      likes: "1.2K",
-      video:
-        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-    },
-    {
-      id: 2,
-      title: "When Love Becomes a Memory ❤️😢",
-      category: "Love",
-      views: "8.4K",
-      likes: "945",
-      video:
-        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-    },
-    {
-      id: 3,
-      title: "The Funniest Cat Moment 😂🐱",
-      category: "Funny",
-      views: "22K",
-      likes: "2.8K",
-      video:
-        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-    },
-    {
-      id: 4,
-      title: "The Mystery of the Old Forest 👻🌲",
-      category: "Horror",
-      views: "16K",
-      likes: "1.7K",
-      video:
-        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-    },
-    {
-      id: 5,
-      title: "A Beautiful Morning in the Village 🏡",
-      category: "Village",
-      views: "6.9K",
-      likes: "720",
-      video:
-        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-    },
-    {
-      id: 6,
-      title: "A Bird Searching for Its Home 🐦",
-      category: "Birds",
-      views: "11K",
-      likes: "1.1K",
-      video:
-        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-    },
-    {
-      id: 7,
-      title: "Never Give Up — Your Story Isn't Over 💪",
-      category: "Motivation",
-      views: "18K",
-      likes: "2.1K",
-      video:
-        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-    },
-    {
-      id: 8,
-      title: "Night Lights of the City 🌆✨",
-      category: "City",
-      views: "9.2K",
-      likes: "870",
-      video:
-        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-    },
-    {
-      id: 9,
-      title: "The Secret Magical Kingdom 👑✨",
-      category: "Fantasy",
-      views: "14K",
-      likes: "1.5K",
-      video:
-        "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-    }
-  ];
-
-  let currentCategory = "All";
-  let currentVideo = null;
-
-  const feed = document.getElementById("shortsFeed");
-  const searchInput = document.getElementById("searchInput");
-  const emptyState = document.getElementById("emptyState");
-  const feedTitle = document.getElementById("feedTitle");
-
-  function renderShorts() {
-
-    const search = searchInput.value.toLowerCase().trim();
-
-    const filtered = shorts.filter(item => {
-
-      const categoryMatch =
-        currentCategory === "All" ||
-        item.category === currentCategory;
-
-      const searchMatch =
-        !search ||
-        item.title.toLowerCase().includes(search) ||
-        item.category.toLowerCase().includes(search);
-
-      return categoryMatch && searchMatch;
-    });
-
-    feed.innerHTML = "";
-
-    if (!filtered.length) {
-      emptyState.style.display = "block";
-      return;
-    }
-
-    emptyState.style.display = "none";
-
-    filtered.forEach(item => {
-
-      const card = document.createElement("article");
-
-      card.className = "short-card";
-
-      card.innerHTML = `
-        <video
-          src="${item.video}"
-          muted
-          playsinline
-          preload="metadata"
-        ></video>
-
-        <div class="video-overlay"></div>
-
-        <div class="play-badge">▶</div>
-
-        <div class="short-info">
-
-          <div class="short-category">
-            ${getCategoryEmoji(item.category)} ${item.category}
-          </div>
-
-          <div class="short-title">
-            ${escapeHTML(item.title)}
-          </div>
-
-          <div class="short-stats">
-            <span>👁 ${item.views}</span>
-            <span>❤️ ${item.likes}</span>
-          </div>
-
-        </div>
-      `;
-
-      card.addEventListener("click", () => openPlayer(item));
-
-      feed.appendChild(card);
-    });
-
-    setupVideoPreview();
-  }
-
-  function setupVideoPreview() {
-
-    const videos = document.querySelectorAll(".short-card video");
-
-    videos.forEach(video => {
-
-      const card = video.closest(".short-card");
-
-      card.addEventListener("mouseenter", () => {
-        video.play().catch(() => {});
-      });
-
-      card.addEventListener("mouseleave", () => {
-        video.pause();
-        video.currentTime = 0;
-      });
-
-      const observer = new IntersectionObserver(entries => {
-
-        entries.forEach(entry => {
-
-          if (entry.isIntersecting) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-
-        });
-
-      }, {
-        threshold: 0.65
-      });
-
-      observer.observe(card);
-    });
-  }
-
-  function openPlayer(item) {
-
-    currentVideo = item;
-
-    const modal = document.getElementById("playerModal");
-    const player = document.getElementById("mainPlayer");
-
-    document.getElementById("playerTitle").textContent =
-      item.title;
-
-    document.getElementById("playerCategory").textContent =
-      getCategoryEmoji(item.category) + " " + item.category;
-
-    player.src = item.video;
-
-    modal.classList.add("active");
-
-    document.body.style.overflow = "hidden";
-
-    player.play().catch(() => {});
-  }
-
-  function closePlayer() {
-
-    const modal = document.getElementById("playerModal");
-    const player = document.getElementById("mainPlayer");
-
-    player.pause();
-    player.removeAttribute("src");
-    player.load();
-
-    modal.classList.remove("active");
-
-    document.body.style.overflow = "";
-  }
-
-  function getCategoryEmoji(category) {
-
-    const icons = {
-      Love: "❤️",
-      Sad: "😢",
-      Funny: "😂",
-      Attitude: "🔥",
-      Horror: "👻",
-      Animals: "🐶",
-      Birds: "🐦",
-      Wildlife: "🦁",
-      City: "🌆",
-      Village: "🏡",
-      Fantasy: "👑",
-      Motivation: "💪"
-    };
-
-    return icons[category] || "✨";
-  }
-
-  function escapeHTML(text) {
-
-    return text
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  function scrollToShorts() {
-
-    document
-      .getElementById("shortsSection")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-  }
-
-  /* SEARCH */
-
-  searchInput.addEventListener("input", () => {
-
-    feedTitle.textContent =
-      searchInput.value.trim()
-        ? "🔍 Search Results"
-        : "🆕 Latest Shorts";
-
-    renderShorts();
-  });
-
-  /* CATEGORY */
-
-  document
-    .querySelectorAll(".category")
-    .forEach(button => {
-
-      button.addEventListener("click", () => {
-
-        document
-          .querySelectorAll(".category")
-          .forEach(btn =>
-            btn.classList.remove("active")
-          );
-
-        button.classList.add("active");
-
-        currentCategory =
-          button.dataset.category;
-
-        feedTitle.textContent =
-          currentCategory === "All"
-            ? "🆕 Latest Shorts"
-            : getCategoryEmoji(currentCategory) +
-              " " +
-              currentCategory +
-              " Shorts";
-
-        renderShorts();
-      });
-    });
-
-  /* LIKE */
-
-  document
-    .getElementById("likeBtn")
-    .addEventListener("click", function () {
-
-      this.textContent =
-        this.textContent.includes("Liked")
-          ? "❤️ Like"
-          : "❤️ Liked";
-
-    });
-
-  /* SAVE */
-
-  document
-    .getElementById("saveBtn")
-    .addEventListener("click", function () {
-
-      this.textContent =
-        this.textContent.includes("Saved")
-          ? "🔖 Save"
-          : "🔖 Saved";
-
-    });
-
-  /* SHARE */
-
-  document
-    .getElementById("shareBtn")
-    .addEventListener("click", async () => {
-
-      if (!currentVideo) return;
-
-      const shareData = {
-        title: currentVideo.title,
-        text: "Watch this Short on Anu AI Shorts!",
-        url: window.location.href
-      };
-
-      try {
-
-        if (navigator.share) {
-          await navigator.share(shareData);
-        } else {
-
-          await navigator.clipboard.writeText(
-            window.location.href
-          );
-
-          alert("Link copied!");
-
-        }
-
-      } catch (error) {
-        console.log(error);
-      }
-    });
-
-  /* ESC CLOSE */
-
-  document.addEventListener("keydown", event => {
-
-    if (event.key === "Escape") {
-      closePlayer();
-    }
-
-  });
-
-  /* START */
-
-  renderShorts();
-
-</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 const SUPABASE_URL = "https://kjuejpzpigkbhjxkksml.supabase.co";
-const SUPABASE_KEY = "sb_publishable_QUcBfXi4cAkkXNf08g_nyQ_FA6sgtvh";
+
+const SUPABASE_KEY =
+"sb_publishable_QUcBfXi4cAkkXNf08g_nyQ_FA6sgtvh";
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
-async function loadVideosFromSupabase() {
+let shorts = [];
+let currentCategory = "All";
+let currentVideo = null;
+
+
+/* DEMO VIDEOS */
+const demoVideos = [
+  {
+    id:"demo1",
+    title:"A Little Dog With a Big Heart 🐶❤️",
+    description:"A cute and emotional AI short.",
+    category:"Animals",
+    video:"",
+    thumbnail:"",
+    views:"0",
+    likes:"0"
+  },
+  {
+    id:"demo2",
+    title:"Beautiful Love Story ❤️",
+    description:"A romantic AI short.",
+    category:"Love",
+    video:"",
+    thumbnail:"",
+    views:"0",
+    likes:"0"
+  }
+];
+
+
+/* LOAD VIDEOS FROM SUPABASE */
+async function loadVideos(){
+
+  const grid = document.getElementById("shortsGrid");
+
+  grid.innerHTML =
+    '<div class="empty">Loading videos...</div>';
+
   const { data, error } = await supabaseClient
     .from("Videos")
     .select("*")
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending:false });
 
-  if (error) {
-    console.error("Supabase error:", error);
+  if(error){
+
+    console.error("Supabase Error:",error);
+
+    shorts = demoVideos;
+    renderShorts();
     return;
   }
 
-  console.log("Supabase Videos:", data);
+  if(data && data.length > 0){
+
+    shorts = data.map(item => ({
+      id:item.id,
+      title:item.title || "Untitled Video",
+      description:item.description || "",
+      category:item.category || "General",
+      video:item.video_url || "",
+      thumbnail:item.thumbnail_url || "",
+      views:item.views || "0",
+      likes:item.likes || "0"
+    }));
+
+  }else{
+
+    shorts = demoVideos;
+
+  }
+
+  renderShorts();
 }
 
-loadVideosFromSupabase();
+
+/* RENDER VIDEOS */
+function renderShorts(){
+
+  const grid = document.getElementById("shortsGrid");
+  const search =
+    document.getElementById("searchInput").value
+    .toLowerCase();
+
+  const filtered = shorts.filter(video => {
+
+    const categoryMatch =
+      currentCategory === "All" ||
+      video.category === currentCategory;
+
+    const searchMatch =
+      video.title.toLowerCase().includes(search) ||
+      video.description.toLowerCase().includes(search);
+
+    return categoryMatch && searchMatch;
+
+  });
+
+
+  if(filtered.length === 0){
+
+    grid.innerHTML =
+      '<div class="empty">No videos found 😔</div>';
+
+    return;
+  }
+
+
+  grid.innerHTML = filtered.map(video => {
+
+    const safeVideo =
+      escapeAttribute(video.video);
+
+    return `
+      <div class="card">
+
+        <video
+          src="${safeVideo}"
+          muted
+          playsinline
+          preload="metadata"
+          onclick="openVideo('${video.id}')">
+        </video>
+
+        <div class="info">
+
+          <h3>${escapeHTML(video.title)}</h3>
+
+          <p>${escapeHTML(video.description)}</p>
+
+          <div class="actions">
+
+            <button onclick="likeVideo('${video.id}')">
+              ❤️ ${video.likes}
+            </button>
+
+            <button onclick="saveVideo('${video.id}')">
+              🔖 Save
+            </button>
+
+            <button onclick="shareVideo('${video.id}')">
+              ↗ Share
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+  }).join("");
+}
+
+
+/* OPEN VIDEO */
+function openVideo(id){
+
+  const video =
+    shorts.find(v => String(v.id) === String(id));
+
+  if(!video || !video.video){
+    alert("This video does not have a valid video URL yet.");
+    return;
+  }
+
+  currentVideo = video;
+
+  document.getElementById("modalVideo").src =
+    video.video;
+
+  document.getElementById("modalTitle").textContent =
+    video.title;
+
+  document.getElementById("modalDescription").textContent =
+    video.description;
+
+  document.getElementById("videoModal")
+    .classList.add("show");
+}
+
+
+/* CLOSE VIDEO */
+function closeModal(){
+
+  const player =
+    document.getElementById("modalVideo");
+
+  player.pause();
+  player.src="";
+
+  document.getElementById("videoModal")
+    .classList.remove("show");
+}
+
+
+/* LIKE */
+function likeVideo(id){
+
+  const video =
+    shorts.find(v => String(v.id) === String(id));
+
+  if(video){
+
+    let likes =
+      parseInt(video.likes) || 0;
+
+    video.likes =
+      String(likes + 1);
+
+    renderShorts();
+
+  }
+}
+
+
+/* SAVE */
+function saveVideo(id){
+
+  const saved =
+    JSON.parse(
+      localStorage.getItem("savedVideos") || "[]"
+    );
+
+  if(!saved.includes(id)){
+
+    saved.push(id);
+
+    localStorage.setItem(
+      "savedVideos",
+      JSON.stringify(saved)
+    );
+
+    alert("Video saved 🔖");
+
+  }else{
+
+    alert("Already saved 🔖");
+
+  }
+}
+
+
+/* SHARE */
+async function shareVideo(id){
+
+  const video =
+    shorts.find(v => String(v.id) === String(id));
+
+  if(!video) return;
+
+  const shareData = {
+    title:video.title,
+    text:video.description,
+    url:video.video || location.href
+  };
+
+  try{
+
+    if(navigator.share){
+
+      await navigator.share(shareData);
+
+    }else{
+
+      await navigator.clipboard.writeText(
+        video.video || location.href
+      );
+
+      alert("Link copied 📋");
+
+    }
+
+  }catch(e){
+
+    console.log(e);
+
+  }
+}
+
+
+/* SEARCH */
+document
+  .getElementById("searchInput")
+  .addEventListener("input",renderShorts);
+
+
+/* CATEGORY */
+document
+  .getElementById("categories")
+  .addEventListener("click",function(e){
+
+    if(e.target.tagName !== "BUTTON") return;
+
+    document
+      .querySelectorAll(".categories button")
+      .forEach(btn => btn.classList.remove("active"));
+
+    e.target.classList.add("active");
+
+    currentCategory =
+      e.target.dataset.category;
+
+    renderShorts();
+
+  });
+
+
+/* ESCAPE HTML */
+function escapeHTML(value){
+
+  return String(value || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ESCAPE ATTRIBUTE */
+function escapeAttribute(value){
+
+  return String(value || "")
+    .replace(/&/g,"&amp;")
+    .replace(/"/g,"&quot;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+
+}
+
+
+/* START */
+loadVideos();
+
 </script>
+
 </body>
 </html>
